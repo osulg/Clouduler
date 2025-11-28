@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- 안쪽 색 -->
+    <solid android:color="#faf8f5"/> <!-- 원하는 색으로 변경 -->
+
+    <!-- 외곽선(스트로크) -->
+    <stroke
+        android:width="8dp"
+        android:color="#8a817c"/>  <!-- 원하는 색으로 변경 -->
+
+    <!-- 모서리 둥글게 -->
+    <corners android:radius="20dp"/>
+
+    <!-- 안쪽 패딩 -->
+    <padding
+        android:left="12dp"
+        android:right="12dp"
+        android:top="8dp"
+        android:bottom="8dp"/>
+</shape>

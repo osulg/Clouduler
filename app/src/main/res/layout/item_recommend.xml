@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
+
+    <!-- 카드 배경 -->
+    <ImageView
+        android:id="@+id/bg_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_item" />
+
+    <!-- 가로 배치 : 왼쪽 텍스트 + 오른쪽 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvIndex"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:text="1"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="#faf8f5"
+                android:background="@drawable/num_circle"
+                android:layout_marginEnd="8dp" />
+
+            <!-- 과목명 -->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="과목명"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#444444" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="난이도: ★★★★☆"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_importance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="중요도: ★★★★☆"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D-5 | 우선순위 점수 3.2"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+</FrameLayout>
+

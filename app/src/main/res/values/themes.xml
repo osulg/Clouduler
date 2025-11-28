@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Clouduler" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+
+        <!-- ✅ CalendarView 선택색 관련 (Material3 기준) -->
+        <item name="colorPrimary">#8A817C</item>               <!-- 선택된 날짜 원 배경색 -->
+        <item name="colorOnPrimary">#FFFFFF</item>              <!-- 선택된 날짜 글자색 -->
+        <item name="colorPrimaryContainer">#BFB8B3</item>       <!-- 캘린더 헤더/탭 배경 등 -->
+        <item name="colorOnPrimaryContainer">#FFFFFF</item>     <!-- 헤더 텍스트색 -->
+    </style>
+
+    <style name="Theme.Clouduler" parent="Base.Theme.Clouduler">
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+        <item name="android:colorActivatedHighlight">@android:color/transparent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+</resources>

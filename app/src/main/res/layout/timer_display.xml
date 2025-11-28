@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="64dp"
+    android:paddingBottom="48dp">
+
+    <!-- 큰 숫자: 분 -->
+
+    <!-- 작은 숫자: 초 (분 오른쪽 아래 배치) -->
+    <TextView
+        android:id="@+id/tvMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/timer_box"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="00'"
+        android:textColor="#FFFFFF"
+        android:textSize="96sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:layout_gravity="center|bottom|right"
+        android:translationX="80dp"
+        android:translationY="20dp"
+        android:background="@drawable/timer_box" />
+
+</FrameLayout>

@@ -1,0 +1,173 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pomodoro">
+
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_sound"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="352dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_sound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_vibrate"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="352dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_vibrate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/btn_silent"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="352dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_silent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/minText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25'"
+            android:textColor="#FFFFFF"
+            android:textSize="90sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/secText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="00"
+            android:textColor="#FFFFFF"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/minText"
+            app:layout_constraintStart_toEndOf="@id/minText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <SeekBar
+        android:id="@+id/timerSeekBar"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:max="30"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/dotted_seekbar"
+        android:splitTrack="false"
+        android:thumb="@drawable/ic_cloud"
+        android:thumbOffset="20dp"
+        android:thumbTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timerGroup" />
+
+    <LinearLayout
+        android:id="@+id/buttonRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="60dp">
+
+        <ImageButton
+            android:id="@+id/btnStart"
+            android:layout_width="155dp"
+            android:layout_height="62dp"
+            android:src="@drawable/btn_start"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+
+        <ImageButton
+            android:id="@+id/btnPause"
+            android:layout_width="155dp"
+            android:layout_height="62dp"
+            android:src="@drawable/btn_pause"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/btnResume"
+            android:layout_width="155dp"
+            android:layout_height="62dp"
+            android:src="@drawable/btn_resume"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:visibility="gone"/>
+
+        <Space
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/btnReset"
+            android:layout_width="155dp"
+            android:layout_height="62dp"
+            android:src="@drawable/btn_reset"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

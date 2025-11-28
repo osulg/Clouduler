@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="공부할 과목을 선택해주세요"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp"
+        android:textColor="#333333"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjectRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="12dp"
+        android:overScrollMode="never"
+        android:clipToPadding="false"/>
+
+    <Button
+        android:id="@+id/btnNoSubject"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="과목 선택 안 함"
+        android:backgroundTint="#D3D3D3"
+        android:textColor="#000000"
+        android:layout_marginTop="12dp"/>
+
+</LinearLayout>
