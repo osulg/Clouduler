@@ -1,6 +1,5 @@
 package com.example.clouduler.data
 
-import android.media.Image
 import com.example.clouduler.R
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -8,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clouduler.data.SubjectEntity
-import com.example.clouduler.ui.CustomDotSpan
 
 class SubjectAdapter(
     private val subjects: MutableList<SubjectEntity>,

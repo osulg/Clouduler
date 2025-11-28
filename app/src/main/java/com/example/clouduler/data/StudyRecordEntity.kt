@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "study_record")
-class StudyRecordEntity (
+data class StudyRecordEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val subjectId: Int?,

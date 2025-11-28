@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clouduler.DailyRecord
 import com.example.clouduler.R
@@ -23,7 +24,6 @@ class StudyRecordAdapter(
     inner class RecordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvRecordDate: TextView = itemView.findViewById(R.id.tvRecordDate)
         val tvRecordTime: TextView = itemView.findViewById(R.id.tvRecordTime)
-        val progressStudy: ProgressBar = itemView.findViewById(R.id.progressStudy)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
@@ -44,28 +44,28 @@ class StudyRecordAdapter(
             .maxOfOrNull { (it.totalTime / 1000L / 60L).toInt() }
             ?: 1
 
-        val percent = when {
-            minutes == 0 -> 0
-            maxMinutes == 0 -> 0
-            else -> {
-                // 최소 20% ~ 최대 100%
-                20 + (minutes * 80 / maxMinutes)
+        val percent =
+            if(maxMinutes>0){
+                (minutes*100/maxMinutes)
             }
-        }
+            else{
+                0
+            }
 
-        // 0분이면 progress 숨김
-        if (minutes == 0) {
-            holder.progressStudy.visibility = View.INVISIBLE
-        } else {
-            holder.progressStudy.visibility = View.VISIBLE
-            holder.progressStudy.progress = percent
-        }
+        val barBack = holder.itemView.findViewById<View>(R.id.barBack)
+        val barFill = holder.itemView.findViewById<View>(R.id.barFill)
 
-        // 과목 색상 적용
-        holder.progressStudy.progressDrawable.setTint(subjectColor)
+        barBack.post {
+            val maxWidth = barBack.width
+            val newWidth = (maxWidth * percent / 100)
+            val params = barFill.layoutParams
+            params.width = newWidth
+            barFill.layoutParams = params
+
+            DrawableCompat.setTint(barFill.background, subjectColor)
+
+        }
     }
-
-
 
     override fun getItemCount(): Int = records.size
 

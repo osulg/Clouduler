@@ -9,31 +9,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
+        android:text="2025-11-25"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="6dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="6dp">
+        android:orientation="horizontal">
 
-        <ProgressBar
-            android:id="@+id/progressStudy"
+        <!-- bar 영역 -->
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:layout_weight="1"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/study_bar"
-            android:max="100"
-            android:progress="0" />
+            android:layout_height="10dp"
+            android:layout_weight="1">
 
+            <View
+                android:id="@+id/barBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bar_back_record"/>
+
+            <View
+                android:id="@+id/barFill"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bar_fill_record"/>
+        </FrameLayout>
+
+        <!-- 학습 시간 텍스트 -->
         <TextView
             android:id="@+id/tvRecordTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:textSize="14sp"/>
+            android:text="6분"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

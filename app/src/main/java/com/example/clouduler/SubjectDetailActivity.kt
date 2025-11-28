@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,37 +48,41 @@ class SubjectDetailActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val subject = subjectDao.getSubjectById(subjectId)
-            val totalTime = recordDao.getTotalStudyTime(subjectId) ?: 0
-            val record = recordDao.getRecordBySubject(subjectId)
-
-            // 날짜별 묶음
-            val dailyRecords = record
-                .groupBy { it.date }
-                .map { (date, list) ->
-                    DailyRecord(
-                        date = date,
-                        totalTime = list.sumOf { it.studyTime }
-                    )
-                }
-                .sortedByDescending { it.date }
 
             withContext(Dispatchers.Main) {
                 tvSubjectName.text = subject.name
 
-                val date = LocalDate.parse(subject.examDate)
-                val dday = ChronoUnit.DAYS.between(LocalDate.now(), date)
-                tvDday.text = "D-$dday"
+                val today = LocalDate.now()
+                val exam = LocalDate.parse(subject.examDate)
+                val diff = ChronoUnit.DAYS.between(today, exam).toInt()
 
-                val minutes = totalTime / 1000 / 60
-                tvTotalStudy.text = "누적 공부시간: ${minutes}분"
-
-                // ⭐ 과목 색상 전달
+                val dDayText = when {
+                    diff > 0 -> "D-$diff"       // 시험이 앞으로 남았을 때
+                    diff == 0 -> "D-Day"        // 시험 당일
+                    else -> "D+${-diff}"        // 시험이 이미 지났을 때
+                }
+                tvDday.text = dDayText
                 recordAdapter.setSubjectColor(subject.color)
-
-                // ⭐ 날짜별 기록 업데이트
-                recordAdapter.updateData(dailyRecords)
             }
         }
+
+        recordDao.getRecordBySubject(subjectId)
+            .observe(this, Observer { list ->
+                val dailyRecord = list
+                    .groupBy { it.date }
+                    .map { (date, items) ->
+                        DailyRecord(
+                            date = date,
+                            totalTime = items.sumOf { it.studyTime }
+                        )
+                    }
+                    .sortedByDescending { it.date }
+
+                recordAdapter.updateData(dailyRecord)
+
+                val totalMin = list.sumOf { it.studyTime } / 1000 / 60
+                tvTotalStudy.text = "누적 공부 시간 : ${totalMin}분"
+            })
 
         btnExit.setOnClickListener { finish() }
     }

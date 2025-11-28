@@ -378,7 +378,7 @@ class PomodoroTimerActivity : AppCompatActivity() {
         )
 
         lifecycleScope.launch {
-            dao.insertRecord(record)
+            dao.insertOrUpdate(record)
         }
 
     }
