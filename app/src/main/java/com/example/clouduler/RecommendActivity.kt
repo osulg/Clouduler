@@ -46,7 +46,12 @@ class RecommendActivity : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.Default){
                 val today = LocalDate.now()
 
-                val items = subj.map { subj ->
+                val validSubject = subj.filter { subject ->
+                    val examDate = LocalDate.parse(subject.examDate)
+                    !examDate.isBefore(today)
+                }
+
+                val items = validSubject.map { subj ->
                     val examDate = LocalDate.parse(subj.examDate)
                     val daysBetween = ChronoUnit.DAYS.between(today,examDate).toDouble()
                     val priority = (subj.difficulty.toDouble() * 0.4 + subj.importance.toDouble() * 0.6)
