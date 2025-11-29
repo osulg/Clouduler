@@ -104,6 +104,22 @@ class AddActivity : AppCompatActivity() {
         val db = AppDatabase.getDatabase(this)
         val dao = db.subjectDao()
 
+        val subjectId = intent.getIntExtra("subjectID",-1)
+
+        if(subjectId != -1){
+            lifecycleScope.launch(Dispatchers.IO) {
+                val existSubject = dao.getSubjectById(subjectId)
+
+                launch(Dispatchers.Main) {
+                    editSubject.setText(existSubject.name)
+                    selectedDate = existSubject.examDate
+                    difficultyLevel = existSubject.difficulty
+                    importanceLevel = existSubject.importance
+                    curSelectedColor = existSubject.color
+                }
+            }
+        }
+
         // 날짜 선택
         // yyyy-mm-dd 형식 저장
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -142,34 +158,48 @@ class AddActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val subjectName = editSubject.text.toString().trim()
 
-            // 1) 기본색을 parentColors 첫 번째 색으로 지정
-            val fallbackColor = allColors.first()
-
-            // 2) 실제 저장할 색
-            val finalColor = curSelectedColor ?: fallbackColor
-            Log.d("COLOR_CHECK", "최종 저장 색상: $finalColor")
-
-            val subject = SubjectEntity(
-                name = subjectName,
-                examDate = selectedDate,
-                difficulty = difficultyLevel,
-                importance = importanceLevel,
-                color = finalColor
-                )
-
             if (subjectName.isEmpty() || selectedDate.isEmpty()) {
                 Toast.makeText(this, "모든 정보를 입력하세요!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            val finalColor = curSelectedColor ?: allColors.first()
+
             lifecycleScope.launch(Dispatchers.IO) {
-                dao.insertSubject(subject)
-                Log.d("DB_DEBUG", "과목 저장 완료: ${subject.name}, ${subject.examDate}")
+
+                if(subjectId == -1) {
+                    // ★ 새 과목 추가
+                    val newSubject = SubjectEntity(
+                        name = subjectName,
+                        examDate = selectedDate,
+                        difficulty = difficultyLevel,
+                        importance = importanceLevel,
+                        color = finalColor
+                    )
+                    dao.insertSubject(newSubject)
+
+                } else {
+                    // ★ 기존 과목 수정
+                    val updatedSubject = SubjectEntity(
+                        id = subjectId,         // ★ 가장 중요 ★
+                        name = subjectName,
+                        examDate = selectedDate,
+                        difficulty = difficultyLevel,
+                        importance = importanceLevel,
+                        color = finalColor
+                    )
+                    dao.updateSubject(updatedSubject)
+                }
 
                 launch(Dispatchers.Main) {
                     Toast.makeText(this@AddActivity, "저장 완료!", Toast.LENGTH_SHORT).show()
                     finish()
                 }
+            }
+
+            if (subjectName.isEmpty() || selectedDate.isEmpty()) {
+                Toast.makeText(this, "모든 정보를 입력하세요!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
         }
     }
