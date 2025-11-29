@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="#faf8f5"
     android:padding="20dp">
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="과목 선택 안 함"
-        android:backgroundTint="#D3D3D3"
+        android:backgroundTint="#d8d6d0"
         android:textColor="#000000"
         android:layout_marginTop="12dp"/>
 

@@ -42,8 +42,8 @@ class PomodoroTimerActivity : AppCompatActivity() {
     private var uiState = TimerState.READY
 
     private var countDownTimer: CountDownTimer? = null
-    private val focusTime = 20 * 1000L
-    private val breakTime = 10 * 1000L
+    private val focusTime = 25 * 60 * 1000L
+    private val breakTime = 5 * 60 * 1000L
     private var millisRemaining = focusTime
     private var mode = TimerMode.FOCUS
 
@@ -227,7 +227,7 @@ class PomodoroTimerActivity : AppCompatActivity() {
                             onNo = {
                                 saveStudyRecord()
                                 startActivity(
-                                    Intent(this@PomodoroTimerActivity, TimerModeActivity::class.java)
+                                    Intent(this@PomodoroTimerActivity, MainActivity::class.java)
                                 )
                                 finish()
                             }
@@ -278,7 +278,8 @@ class PomodoroTimerActivity : AppCompatActivity() {
     private fun updateSeekBarBreak(millis: Long) {
         val totalSec = breakTime / 1000     // 300
         val passedSec = totalSec - (millis / 1000)
-        timerSeekBar.progress = 20 + passedSec.toInt()
+        val progress = 1500 + passedSec
+        timerSeekBar.progress = progress.toInt()
     }
 
     private fun playVibrate(){
