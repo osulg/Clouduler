@@ -87,6 +87,7 @@ class NormalTimerActivity : AppCompatActivity() {
     private var countDownTimer: CountDownTimer? = null // 실제 타이머
     private var millisRemaining: Long = 0L // 남은 시간
     private var totalSelectedTime: Long = 0L // 처음 설정된 전체 시간
+    private val MAX_minutes = 120 // 최대 120분
 
     // ----- 과목 정보 ----- //
     // 타이머에 연결할 과목 ID
@@ -111,14 +112,25 @@ class NormalTimerActivity : AppCompatActivity() {
 
     // ---------- SeekBar 설정 ---------- //
 
+    /* progressToMinutes
+     * 퍼센트를 실제 분으로 변환
+     */
+    private fun progressToMinutes(progress: Int): Int {
+        val minutesRaw = (progress / 100f) * MAX_minutes
+
+        return when (unitMode) {
+            UnitMode.ONE_MIN -> minutesRaw.toInt()
+            UnitMode.FIVE_MIN -> ((minutesRaw / 5).toInt() * 5)
+        }.coerceIn(0, MAX_minutes)
+    }
+
+
     /* setupSeekBar
      * 타이머 시간을 설정하는 SeekBar 설정
      * - max=120 → 최대 120분까지 설정 가능
      * - progress 값에 따라 분 텍스트 업데이트
      */
     private fun setupSeekBar() {
-        timerSeekBar.max = 120    // 최대 120분 = 120칸
-
         timerSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             // seekBar 값 변경 -> 호출
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -138,11 +150,7 @@ class NormalTimerActivity : AppCompatActivity() {
      * - FIVE_MIN: progress를 5분 단위
      */
     private fun updateSeekBarTimeText(progress: Int) {
-        val minutes =
-            when (unitMode) {
-                UnitMode.ONE_MIN -> progress // 1분 단위
-                UnitMode.FIVE_MIN -> (progress / 5) * 5 // 5분 단위 반올림
-            }
+        val minutes = progressToMinutes(progress)
 
         // MM 형태로 텍스트 표시
         minText.text = String.format("%02d'", minutes)
@@ -194,12 +202,8 @@ class NormalTimerActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             unitToggleGroup.isEnabled = false // 타이머 시작 후 -> 시간 단위 변경 비활성화
 
-            // 현재 단위 모드에서 선택된 총 분 계산
-            val selectedMinutes =
-                when (unitMode) {
-                    UnitMode.ONE_MIN -> timerSeekBar.progress
-                    UnitMode.FIVE_MIN -> (timerSeekBar.progress / 5) * 5
-                }
+            // 선택한 시간에 대해 분 계산
+            val selectedMinutes = progressToMinutes(timerSeekBar.progress)
 
             // 선택된 분을 ms로 변환
             totalSelectedTime = selectedMinutes * 60000L
@@ -207,6 +211,7 @@ class NormalTimerActivity : AppCompatActivity() {
 
             // 타이머 진행 -> seekbar 드래그 불가능
             timerSeekBar.isEnabled = false
+            timerSeekBar.progress = 0
 
             // 상태 변경
             // 대기 -> 실행중
@@ -433,11 +438,8 @@ class NormalTimerActivity : AppCompatActivity() {
      */
     private fun updateSeekBarProgress(millis: Long) {
         val elapsed = totalSelectedTime - millisRemaining
-
         val percent = ((elapsed.toFloat() / totalSelectedTime.toFloat()) * 100).toInt()
         timerSeekBar.progress = percent.coerceIn(0, 100)
-
-        timerSeekBar.invalidate()  // 즉시 redraw
     }
 
     // ---------- SoundPool ---------- //
@@ -529,6 +531,8 @@ class NormalTimerActivity : AppCompatActivity() {
         // 아니요
         // 타이머를 초기 상태로 리셋 + 해당 화면으로 유지
         btnNo.setOnClickListener {
+            saveStudyRecord()
+
             // 초기 상태
             uiState = TimerState.READY
             updateUI()
