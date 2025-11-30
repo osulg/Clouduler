@@ -6,7 +6,6 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp">
 
-    <!-- 카드 배경 -->
     <ImageView
         android:id="@+id/bg_item"
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
         android:scaleType="fitXY"
         android:src="@drawable/bg_item" />
 
-    <!-- 가로 배치 : 왼쪽 텍스트 + 오른쪽 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +40,6 @@
                 android:background="@drawable/num_circle"
                 android:layout_marginEnd="8dp" />
 
-            <!-- 과목명 -->
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"

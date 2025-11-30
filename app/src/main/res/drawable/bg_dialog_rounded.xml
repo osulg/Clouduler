@@ -3,12 +3,12 @@
     android:shape="rectangle">
 
     <!-- 안쪽 색 -->
-    <solid android:color="#faf8f5"/> <!-- 원하는 색으로 변경 -->
+    <solid android:color="#faf8f5"/> 
 
-    <!-- 외곽선(스트로크) -->
+    <!-- 외곽선 -->
     <stroke
         android:width="8dp"
-        android:color="#8a817c"/>  <!-- 원하는 색으로 변경 -->
+        android:color="#8a817c"/>
 
     <!-- 모서리 둥글게 -->
     <corners android:radius="20dp"/>

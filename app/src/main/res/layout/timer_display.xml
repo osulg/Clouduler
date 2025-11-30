@@ -5,9 +5,6 @@
     android:paddingTop="64dp"
     android:paddingBottom="48dp">
 
-    <!-- 큰 숫자: 분 -->
-
-    <!-- 작은 숫자: 초 (분 오른쪽 아래 배치) -->
     <TextView
         android:id="@+id/tvMinute"
         android:layout_width="wrap_content"

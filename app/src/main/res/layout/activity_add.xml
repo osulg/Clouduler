@@ -8,9 +8,6 @@
     android:background="@drawable/bg_add"
     tools:context=".AddActivity">
 
-    <!-- 과목 이름 입력 -->
-
-    <!-- 달력 -->
 
     <EditText
         android:id="@+id/edit_subject"
@@ -38,8 +35,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_subject" />
-
-    <!-- 저장 버튼 (하단 중앙) -->
 
     <ImageButton
         android:id="@+id/btn_difficulty"

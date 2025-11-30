@@ -19,7 +19,6 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <!-- bar 영역 -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="10dp"
@@ -38,7 +37,6 @@
                 android:background="@drawable/bar_fill_record"/>
         </FrameLayout>
 
-        <!-- 학습 시간 텍스트 -->
         <TextView
             android:id="@+id/tvRecordTime"
             android:layout_width="wrap_content"

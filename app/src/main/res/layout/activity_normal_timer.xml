@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_normal">
 
-    <!-- 뒤로가기 버튼 -->
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="42dp"
@@ -63,13 +62,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
 
-    <!-- TIMER GROUP -->
-
-    <!-- SEEK BAR -->
-
-    <!-- 버튼 그룹 -->
-
-    <!-- TIMER GROUP (시간 표시) -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/timerGroup"
         android:layout_width="wrap_content"
@@ -140,7 +132,7 @@
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
-        android:max="120"
+        android:max="100"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:progress="0"

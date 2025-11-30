@@ -2,9 +2,7 @@ package com.example.clouduler
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.CalendarView
@@ -14,7 +12,6 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Room
 import com.example.clouduler.data.AppDatabase
 import com.example.clouduler.data.SubjectEntity
 import java.text.SimpleDateFormat
@@ -27,16 +24,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.example.clouduler.data.ParentColorAdapter
-import com.example.clouduler.data.ToneColorAdapter
 
+/* AddActivity
+ * - 과목 추가 or 수정 화면
+ * - 과목명 / 시험명 / 난이도 / 중요도 / 색상 선택
+*/
 class AddActivity : AppCompatActivity() {
 
+    // 난이도 / 중요도 / 날짜 선택한 값
     private var difficultyLevel = 0f
     private var importanceLevel = 0f
     private var selectedDate = ""
 
+    // 선택된 색상
     private var curSelectedColor: Int? = null
 
+    // 전체 색상 리스트
     private val allColors = listOf(
         0xFFFAE3E2.toInt(),
         0xFFF6F3EE.toInt(),
@@ -92,6 +95,7 @@ class AddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
 
+        // ----- xml에서의 UI 요소 참조 ----- //
         val editSubject = findViewById<EditText>(R.id.edit_subject)
         val calendarView = findViewById<CalendarView>(R.id.calendarView2)
         val btnSave = findViewById<ImageButton>(R.id.btn_save)
@@ -100,16 +104,19 @@ class AddActivity : AppCompatActivity() {
         val btnImp = findViewById<ImageButton>(R.id.btn_importance)
         val btnColor = findViewById<ImageButton>(R.id.btn_colorPicker)
 
-        // Room DB 인스턴스 생성
+        // ------ Room DB 및 DAO ------ //
         val db = AppDatabase.getDatabase(this)
         val dao = db.subjectDao()
 
+        // ----- 수정하는 단계인지 확인 ----- //
         val subjectId = intent.getIntExtra("subjectID",-1)
 
+        // 1) 수정 단계라면 -> 기존 데이터 불러오기
         if(subjectId != -1){
             lifecycleScope.launch(Dispatchers.IO) {
                 val existSubject = dao.getSubjectById(subjectId)
 
+                // UI 업데이트는 Main에서 수행
                 launch(Dispatchers.Main) {
                     editSubject.setText(existSubject.name)
                     selectedDate = existSubject.examDate
@@ -120,8 +127,8 @@ class AddActivity : AppCompatActivity() {
             }
         }
 
-        // 날짜 선택
-        // yyyy-mm-dd 형식 저장
+        // 2) 날짜 선택
+        // yyyy-mm-dd 형식 저장 -> SelectedDate에 저장
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
 
@@ -151,24 +158,28 @@ class AddActivity : AppCompatActivity() {
             }
         }
 
+        // 색상 버튼 클릭 -> BottomSheet에서 선택
         btnColor.setOnClickListener {
             showColorPicker(btnColor)
         }
 
+        // 저장 버튼 클릭
+        // - 생성 or 수정
         btnSave.setOnClickListener {
             val subjectName = editSubject.text.toString().trim()
 
+            // 입력이 완료되었는지 확인
             if (subjectName.isEmpty() || selectedDate.isEmpty()) {
                 Toast.makeText(this, "모든 정보를 입력하세요!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
+            // 선택된 색상이 없으면 가장 첫번째 색상 선택
             val finalColor = curSelectedColor ?: allColors.first()
 
             lifecycleScope.launch(Dispatchers.IO) {
-
                 if(subjectId == -1) {
-                    // ★ 새 과목 추가
+                    // 새 과목 추가
                     val newSubject = SubjectEntity(
                         name = subjectName,
                         examDate = selectedDate,
@@ -179,9 +190,9 @@ class AddActivity : AppCompatActivity() {
                     dao.insertSubject(newSubject)
 
                 } else {
-                    // ★ 기존 과목 수정
+                    // 기존 과목 수정
                     val updatedSubject = SubjectEntity(
-                        id = subjectId,         // ★ 가장 중요 ★
+                        id = subjectId,         
                         name = subjectName,
                         examDate = selectedDate,
                         difficulty = difficultyLevel,
@@ -191,59 +202,79 @@ class AddActivity : AppCompatActivity() {
                     dao.updateSubject(updatedSubject)
                 }
 
+                // 저장 완료 후 UI 처리
                 launch(Dispatchers.Main) {
                     Toast.makeText(this@AddActivity, "저장 완료!", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
-
-            if (subjectName.isEmpty() || selectedDate.isEmpty()) {
-                Toast.makeText(this, "모든 정보를 입력하세요!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
         }
     }
 
-    // 다이얼로그 생성 함수
+    /*
+     * 별점으로 난이도/중요도 선택 Dialog
+     * - 난이도 / 중요도 선택
+     * ratingBar 값 반
+    */
     private fun showRatingDialog(title: String, onRated: (Float) -> Unit) {
+        // Dialog 객체 생성
         val dialog = Dialog(this)
+        // dialog_rating.xml layout을 메모리에 inflate -> View 객체로
         val view = LayoutInflater.from(this).inflate(R.layout.dialog_rating, null)
+
+        // 다이얼로그에 커스텀 뷰 연결
         dialog.setContentView(view)
 
+        // 레이아웃 안에 있는 위젯
         val tvTitle = view.findViewById<TextView>(R.id.tv_title)
         val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
         val btnConfirm = view.findViewById<Button>(R.id.btn_confirm)
 
         tvTitle.text = title
 
+        // 확인 버튼 클릭시 동작
         btnConfirm.setOnClickListener {
+            // ratingBar에서 사용자가 선택한 값 가져오기
             val selectedRating = ratingBar.rating
             onRated(selectedRating)
-            dialog.dismiss()
+            dialog.dismiss() // 닫기
         }
 
+        // 다이얼로그 배경을 투명히 설정 (둥근 모서리)
+        // 화면 표시
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
     }
 
+    /*
+     * 색상 선택 BottomSheet
+     * - ParentColorAdapter에서 색상 선택 -> curSelectedColor 업데이트
+     * - 버튼 배경 색도 변경
+    */
     private fun showColorPicker(btnColor: ImageButton) {
+        // Dialog 객체 생성 (Material Design BottomSheetDialog - 하단에서 올라옴)
         val dialog = BottomSheetDialog(this)
+        // color_sheet.xml 레이아웃을 inflate하여 -> View 변환
         val view = layoutInflater.inflate(R.layout.color_sheet, null)
 
+        // 색상 목록을 보여줄 RecyclerView
         val rv = view.findViewById<RecyclerView>(R.id.rvParentColors)
+        // 한 줄에 5개 -> Grid
         rv.layoutManager = GridLayoutManager(this, 5)
 
+        // RecyclerView Adapter
+        // ParentColorAdapter :
+        // - allColors 리스트를 Grid로 보이기
+        // - 특정 색상 선택
         rv.adapter = ParentColorAdapter(allColors) { selected ->
+            // 사용자가 선택한 색상으로 현재 색상 지정
             curSelectedColor = selected
             btnColor.setBackgroundColor(selected)
-            dialog.dismiss()
+            dialog.dismiss() // 선택 후 닫기
         }
 
+        // BottomSheetDialog에 inflate한 View 연결 및 표시
         dialog.setContentView(view)
         dialog.show()
     }
-
-
-
-
 }
