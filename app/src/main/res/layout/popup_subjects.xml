@@ -6,6 +6,7 @@
     android:padding="12dp"
     android:elevation="6dp">
 
+    <!-- 팝업에 나타날 과목명 텍스트뷰 -->
     <TextView
         android:id="@+id/tvSubjects"
         android:layout_width="wrap_content"

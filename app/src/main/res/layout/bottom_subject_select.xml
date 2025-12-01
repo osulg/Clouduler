@@ -7,6 +7,7 @@
     android:background="#faf8f5"
     android:padding="20dp">
 
+    <!-- 공부할 과목을 선택하란 텍스트뷰 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
         android:paddingBottom="16dp"
         android:textColor="#333333"/>
 
+    <!-- 과목 리스트가 나타나는 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjectRecycler"
         android:layout_width="match_parent"
@@ -25,6 +27,7 @@
         android:overScrollMode="never"
         android:clipToPadding="false"/>
 
+    <!-- 과목 선택 안함 버튼 -->
     <Button
         android:id="@+id/btnNoSubject"
         android:layout_width="match_parent"

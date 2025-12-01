@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:paddingVertical="10dp">
 
+    <!-- 공부한 날짜 기록용 텍스트뷰 -->
     <TextView
         android:id="@+id/tvRecordDate"
         android:layout_width="wrap_content"
@@ -12,6 +13,7 @@
         android:text="2025-11-25"
         android:textStyle="bold" />
 
+    <!-- bar와 분 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,12 +26,14 @@
             android:layout_height="10dp"
             android:layout_weight="1">
 
+            <!-- 진행률 표시bar 뒤쪽 -->
             <View
                 android:id="@+id/barBack"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bar_back_record"/>
 
+            <!-- 진행률 표시 bar -->
             <View
                 android:id="@+id/barFill"
                 android:layout_width="0dp"
@@ -37,6 +41,7 @@
                 android:background="@drawable/bar_fill_record"/>
         </FrameLayout>
 
+        <!-- 학습 시간 -->
         <TextView
             android:id="@+id/tvRecordTime"
             android:layout_width="wrap_content"

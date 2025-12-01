@@ -5,6 +5,7 @@
     android:layout_height="56dp"
     android:padding="6dp">
 
+    <!-- 색상 둥글게 표현 -->
     <View
         android:id="@+id/colorCircle"
         android:layout_width="match_parent"

@@ -5,6 +5,7 @@
     android:paddingTop="64dp"
     android:paddingBottom="48dp">
 
+    <!-- 분 텍스트 -->
     <TextView
         android:id="@+id/tvMinute"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:textSize="96sp"
         android:textStyle="bold" />
 
+    <!-- 초 텍스트 -->
     <TextView
         android:id="@+id/tvSecond"
         android:layout_width="wrap_content"

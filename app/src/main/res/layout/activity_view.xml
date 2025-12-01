@@ -8,6 +8,7 @@
     android:background="@drawable/bg_view"
     tools:context=".ViewActivity">
 
+    <!-- 뒤로가기 버튼 -->
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="42dp"
@@ -20,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 하단에 과목 리스트를 표현할 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerView"
     android:layout_width="0dp"

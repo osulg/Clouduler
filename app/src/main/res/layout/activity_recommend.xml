@@ -7,7 +7,7 @@
     android:background="@drawable/bg_recommend"
     tools:context=".RecommendActivity">
 
-    <!-- 상단 돌아가기 버튼 -->
+    <!-- 뒤로가기 버튼 -->
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="42dp"
@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 과목 리스트를 나타낼 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"

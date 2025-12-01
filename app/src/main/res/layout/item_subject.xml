@@ -6,6 +6,7 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp">
 
+    <!-- 각 리스트 항목에 저장할 배경설정 -->
     <ImageView
         android:id="@+id/bg_item"
         android:layout_width="match_parent"
@@ -14,6 +15,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/bg_item" />
 
+    <!-- Linear하게 표현 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +25,14 @@
         android:paddingEnd="20dp"
         android:paddingBottom="20dp">
 
+        <!-- 왼쪽 구성요소 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <!-- 과목명 -->
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
@@ -39,6 +43,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- 시험일 표시 -->
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
@@ -47,6 +52,7 @@
                 android:text="시험일: yyyy-MM-dd"
                 android:textSize="14sp" />
 
+            <!-- 난이도 -->
             <TextView
                 android:id="@+id/tv_difficulty"
                 android:layout_width="wrap_content"
@@ -55,6 +61,7 @@
                 android:text="난이도: ★★★★☆"
                 android:textSize="14sp" />
 
+            <!-- 중요도 -->
             <TextView
                 android:id="@+id/tv_importance"
                 android:layout_width="wrap_content"
@@ -71,6 +78,7 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <!-- 삭제 버튼 -->
             <ImageButton
                 android:id="@+id/btn_delete"
                 android:layout_width="45dp"
@@ -80,6 +88,7 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/btn_delete" />
 
+            <!-- 수정 버튼 -->
             <ImageButton
                 android:id="@+id/btn_update"
                 android:layout_width="45dp"

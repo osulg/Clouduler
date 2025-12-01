@@ -8,7 +8,7 @@
     android:background="@drawable/bg_add"
     tools:context=".AddActivity">
 
-
+    <!-- 과목 입력창 -->
     <EditText
         android:id="@+id/edit_subject"
         android:layout_width="322dp"
@@ -26,6 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 시험 날짜 선택 캘린더 -->
     <CalendarView
         android:id="@+id/calendarView2"
         android:layout_width="match_parent"
@@ -36,6 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_subject" />
 
+    <!-- 난이도 -->
     <ImageButton
         android:id="@+id/btn_difficulty"
         android:layout_width="185dp"
@@ -49,6 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!--중요도-->
     <ImageButton
         android:id="@+id/btn_importance"
         android:layout_width="185dp"
@@ -64,6 +67,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btn_difficulty" />
 
+    <!--저장 버튼-->
     <ImageButton
         android:id="@+id/btn_save"
         android:layout_width="174dp"
@@ -80,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@id/btn_difficulty"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!--뒤로가기 버튼-->
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="42dp"
@@ -92,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 색상 선택 버튼 -->
     <ImageButton
         android:id="@+id/btn_colorPicker"
         android:layout_width="42dp"

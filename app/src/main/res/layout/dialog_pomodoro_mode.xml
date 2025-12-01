@@ -7,6 +7,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!-- 휴식시간을 시작할지 여부를 묻는 텍스트뷰 -->
     <TextView
         android:id="@+id/tv_message"
         android:text="휴식시간을 시작하시겠습니까?"
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- 아니요 버튼 -->
         <Button
             android:id="@+id/btn_no"
             android:text="아니오"
@@ -30,10 +32,12 @@
             android:layout_weight="1"
             android:textColor="#FFFFFF"/>
 
+        <!-- 예/아니요 사이 공간 -->
         <Space
             android:layout_width="16dp"
             android:layout_height="wrap_content"/>
 
+        <!-- 예 버튼 -->
         <Button
             android:id="@+id/btn_yes"
             android:text="예"

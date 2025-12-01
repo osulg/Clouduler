@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_timer_mode">
 
+    <!-- 뒤로가기 버튼 -->
     <ImageButton
         android:id="@+id/btn_back"
         android:layout_width="42dp"
@@ -16,6 +17,7 @@
         android:src="@drawable/btn_back"
         android:layout_gravity="top|start" />
 
+    <!-- 공부 과목 선택 버튼 -->
     <ImageButton
         android:id="@+id/btnTimerSubject"
         android:layout_width="313dp"
@@ -27,6 +29,7 @@
         android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="180dp" />
 
+    <!-- 타이머 모드 버튼 그룹 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutButtons"
         android:layout_width="match_parent"
@@ -34,6 +37,7 @@
         android:layout_gravity="top"
         android:layout_marginTop="320dp">
 
+        <!-- 뽀모도로 모드 버튼 -->
         <ImageButton
             android:id="@+id/btnPomodoro"
             android:layout_width="170dp"
@@ -47,6 +51,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             android:layout_marginEnd="20dp" />
 
+        <!-- 일반 모드 버튼 -->
         <ImageButton
             android:id="@+id/btnNormal"
             android:layout_width="170dp"
@@ -58,8 +63,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </FrameLayout>

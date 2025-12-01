@@ -19,6 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
+        <!-- 나가기 버튼 -->
         <ImageButton
             android:id="@+id/btn_exit"
             android:layout_width="42dp"
@@ -29,6 +30,7 @@
             android:src="@drawable/btn_exit"
             android:layout_gravity="start"/>
 
+        <!-- 과목명 텍스트뷰-->
         <TextView
             android:id="@+id/tvSubjectName"
             android:textSize="22sp"
@@ -37,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp" />
 
+        <!-- D-Day -->
         <TextView
             android:id="@+id/tvDday"
             android:textSize="16sp"
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <!-- 누적 공부 시간 -->
         <TextView
             android:id="@+id/tvTotalStudy"
             android:textSize="18sp"
@@ -51,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <!-- View의 Height를 1로 하여 선처럼 표현 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -58,6 +63,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"/>
 
+        <!-- 하단에 날짜별 공부 시간을 표현할 RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvStudyRecords"
             android:layout_width="match_parent"

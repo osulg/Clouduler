@@ -7,6 +7,7 @@
     android:background="@drawable/bg_dialog_rounded"
     android:gravity="center">
 
+    <!-- 별점 선택 텍스트뷰 -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:textSize="18sp"
         android:layout_marginBottom="12dp"/>
 
+    <!-- 별점을 선택할 RatingBar -->
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
@@ -25,6 +27,7 @@
         android:stepSize="1"
         android:rating="0" />
 
+    <!-- 확인 버튼 -->
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="wrap_content"
